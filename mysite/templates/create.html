@@ -1,14 +1,12 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}Login{% endblock %}
+{% block title %}Signup{% endblock %}
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="col-lg-5 col-md-7 col-sm-9">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Log in</h3>
-                        {% csrf_token %}
+                        <h3 class="card-title">Sign up</h3>
                         {% if form.non_field_errors %}
                             <div class="alert alert-danger alert-text" role="alert">
                                 {% for error in form.non_field_errors %}
@@ -16,7 +14,7 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
-                        <form method="post" action="{% url 'login' %}" class="auth-form" novalidate>
+                        <form method="POST" action="{% url 'create_account' %}" class="auth-form" novalidate>
                             {% csrf_token %}
                             {% for field in form %}
                             <div>
@@ -31,18 +29,12 @@
                                 {% endif %}
                             </div>
                             {% endfor %}
-                            <input type="submit" value="login" class="form-control btn-primary auth-button" />
-                            <input type="hidden" name="next" value="{{ next }}" />
+                            <button type="submit" class="form-control btn-primary auth-button">登録</button>
                         </form>
                     </div>
                     <div class="card-footer text-muted text-center">
-                        <a href="{% url 'create_account' %}">Sign up</a>
+                        Already have an account? <a href="{% url 'login' %}">Log in</a>
                     </div>
-                </div>
-                <div class="text-center py-2">
-                    <small>
-                        <a href="{% url 'password_reset' %}" class="text-muted">Forgot your password?</a>
-                    </small>
                 </div>
             </div>
         </div>
